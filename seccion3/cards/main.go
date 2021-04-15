@@ -1,19 +1,21 @@
 package main
 
-import (
-	"fmt"
-)
+import "log"
 
 func main() {
-	cards := []string{newCard(), "Ace of spades"}
-	cards = append(cards, "Six of spades")
+	cards := newDeck()
 
-	for i, card := range cards {
-		fmt.Println(i, card)
+	hand, remainingDeck := cards.deal(5)
+
+	hand.print()
+	remainingDeck.print()
+	//cards.print()
+	errorSaving := cards.saveToFile("deck.dat")
+	if errorSaving != nil {
+		log.Fatal(errorSaving)
 	}
-
-}
-
-func newCard() string {
-	return "Five of Diamonds"
+	deckImported := newDeckFromFile("deck.dat")
+	//deckImported.print()
+	deckImported.shuffle()
+	deckImported.print()
 }

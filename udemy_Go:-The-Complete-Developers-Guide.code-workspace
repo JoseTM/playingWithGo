@@ -1,13 +1,7 @@
 {
 	"folders": [
       {
-         "path": "seccion1"
-      },
-      {
-         "path": "seccion2"
-      },
-      {
-         "path": "seccion3"
+         "path": "seccion3/cards"
       }
    ]
 }
