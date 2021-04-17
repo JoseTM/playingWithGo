@@ -24,8 +24,38 @@ func main() {
 		},
 	}
 
-	fmt.Println(jose)
-	fmt.Printf("%+v\n", jose)
-	fmt.Println(jose.firstName, jose.lastName)
+	jose.print()
+	jose.updateName("Jose")
+	jose.print()
+	jose.updateNamePointer("Jose")
+	jose.print()
 
+	josePointer := &jose //un puntero a la variable
+	joseSafe := jose
+
+	josePointer.updateNameByPointer("Josith")
+
+	jose.print()
+	joseSafe.print()
+
+	joseSafe.updateNameByPointer("patata")
+	joseSafe.print()
+	jose.print()
+}
+
+func (p *person) updateNamePointer(name string) {
+	p.firstName = name
+}
+
+func (p person) updateName(name string) {
+	p.firstName = name
+}
+
+func (p *person) updateNameByPointer(name string) {
+	(*p).firstName = name
+	//p.firstName = name
+}
+
+func (p person) print() {
+	fmt.Printf("%+v\n", p)
 }
