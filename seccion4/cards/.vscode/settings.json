@@ -1,0 +1,9 @@
+{
+   "go.toolsEnvVars": {
+         "GO111MODULE": "auto"
+   },
+   "go.testEnvVars": {
+      
+      "GO111MODULE": "auto"
+   }
+}
