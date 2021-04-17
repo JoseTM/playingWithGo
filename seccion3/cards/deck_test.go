@@ -1,19 +1,13 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
 func TestNewDeck(t *testing.T) {
 	lengthExpeted := 16
 	cards := newDeck()
-
-	if len(cards) != lengthExpeted {
-		t.Fatalf(`len(cards) = %d, want be length = %v 0`, len(cards), lengthExpeted)
-	}
-}
-
-func TestNewDeckFromFile(t *testing.T) {
-	lengthExpeted := 16
-	cards := newDeckFromFile("deckTest.dat")
 
 	if len(cards) != lengthExpeted {
 		t.Fatalf(`len(cards) = %d, want be length = %v 0`, len(cards), lengthExpeted)
@@ -33,5 +27,31 @@ func TestLastElementOfDeck(t *testing.T) {
 	cards := newDeck()
 	if cards[len(cards)-1] != lastCardExpected {
 		t.Fatalf(`cards[%v] = %q, want be %q  0`, len(cards)-1, cards[len(cards)-1], lastCardExpected)
+	}
+}
+
+func TestSavetoDeck(t *testing.T) {
+	filePath := "deckTest.dat"
+	cards := newDeck()
+
+	fileSaveError := cards.saveToFile(filePath)
+	if fileSaveError != nil {
+		t.Fatalf(`cards maze was not saved, error %q`, fileSaveError)
+	}
+
+}
+
+func TestNewDeckFromFile(t *testing.T) {
+	filePath := "deckTest.dat"
+	lengthExpeted := 16
+	cards := newDeckFromFile(filePath)
+
+	if len(cards) != lengthExpeted {
+		t.Fatalf(`len(cards) = %d, want be length = %v 0`, len(cards), lengthExpeted)
+	}
+
+	fileRemoveError := os.Remove(filePath)
+	if fileRemoveError != nil {
+		t.Fatalf(`cards maze was not saved, error %q`, fileRemoveError)
 	}
 }
