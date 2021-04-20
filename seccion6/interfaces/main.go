@@ -7,4 +7,5 @@ func main() {
 
 	printGreeting(eb)
 	printGreeting(sp)
+
 }
